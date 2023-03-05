@@ -1,0 +1,162 @@
+.add-board-bx {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 4px !important;
+  background-color: #fff;
+}
+.add-btn {
+  color: #757575 !important;
+  font-size: 1rem;
+}
+.add-board-title {
+  width: 85%;
+  font-size: 1rem;
+  border-radius: 4px;
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #ccc;
+  border: none;
+}
+.board {
+  padding: 1rem;
+  background-color: #dddd;
+  border-radius: 4px !important;
+}
+.board-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 4px !important;
+  background-color: #fff;
+  position: relative;
+}
+.board-menu {
+  visibility: hidden;
+}
+.board-menu-option {
+  border-radius: 4px !important;
+}
+.board-top:hover .board-menu {
+  visibility: visible;
+}
+.board-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #0c0c0c;
+}
+.board-counter {
+  background-color: #7f8487;
+  font-size: 0.8rem;
+  color: #fff;
+  margin: 0.5rem;
+  padding: 0.7rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-board {
+  padding: 1rem;
+  background-color: #dddddd;
+  border-radius: 4px !important;
+  height: fit-content;
+}
+
+/* Media Queries */
+/* For large devices */
+
+@media screen and (max-width: 1024px) {
+  .add-board-title {
+    font-size: 1rem;
+  }
+  .add-btn {
+    font-size: 1rem;
+  }
+  .board {
+    padding: 1rem;
+  }
+  .board-top {
+    padding: 0.5rem 1rem;
+  }
+  .board-title {
+    font-size: 1rem;
+  }
+  .board-counter {
+    font-size: 1rem;
+    margin: 0.5rem;
+    padding: 0.7rem;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .add-board {
+    padding: 1rem;
+  }
+}
+
+/* For medium devices */
+
+@media screen and (max-width: 768px) {
+  .add-board-title {
+    font-size: 0.9rem;
+  }
+  .add-btn {
+    font-size: 0.9rem;
+  }
+  .board {
+    padding: 0.9rem;
+  }
+  .board-top {
+    padding: 0.4rem 0.9rem;
+  }
+  .board-title {
+    font-size: 1rem;
+  }
+  .board-counter {
+    font-size: 0.9rem;
+    margin: 0.4rem;
+    padding: 0.6rem;
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+  .add-board {
+    padding: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .add-board-title {
+    font-size: 0.8rem;
+  }
+  .add-btn {
+    font-size: 0.8rem;
+  }
+  .board {
+    padding: 0.8rem;
+  }
+  .board-top {
+    padding: 0.4rem 0.8rem;
+  }
+  .board-title {
+    font-size: 1rem;
+  }
+  .board-counter {
+    font-size: 0.8rem;
+    margin: 0.4rem;
+    padding: 0.6rem;
+    width: 0.4rem;
+    height: 0.4rem;
+  }
+  .add-board {
+    padding: 0.8rem;
+  }
+}

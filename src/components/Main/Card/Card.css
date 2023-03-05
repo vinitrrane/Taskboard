@@ -1,0 +1,216 @@
+.add-card-bx {
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: flex-end;
+  width: 100%;
+}
+.cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 72vh;
+  overflow-y: scroll;
+}
+.card-bx {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  position: relative;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+.card-details-bx {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-details-bx span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  color: #7f8487;
+  font-weight: 600;
+}
+.card-priority {
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 50px;
+  line-height: 1.25;
+  padding: 0.2rem 0.5rem;
+  background-color: green;
+  color: #fff;
+}
+.card-title-bx {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+.card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1.25;
+  color: #0c0c0c;
+}
+.card-label-bx {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  gap: 0.2rem;
+  margin-top: 0.8rem;
+  font-weight: 600;
+}
+.card-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  background-color: #6b728e;
+  max-width: 100%;
+  margin-right: 0.2rem;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  color: #fff;
+}
+.delete-label-btn {
+  color: #fff !important ;
+  font-size: 0.9rem !important;
+}
+.delete-label-btn:hover {
+  color: #ccc !important ;
+}
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.8rem;
+  width: 100%;
+}
+.card-user-bx {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0.8rem;
+  width: 100%;
+}
+.card-user {
+  font-size: 0.8rem;
+  font-weight: bold;
+  line-height: 1.25;
+  color: #0c0c0c;
+}
+.card-menu {
+  visibility: hidden;
+}
+.card-bx:hover .card-menu {
+  visibility: visible;
+}
+
+/* Media Queries */
+/* For medium devices */
+
+@media screen and (max-width: 768px) {
+  .boards {
+    gap: 1rem;
+    width: 100vw;
+    padding: 1rem;
+  }
+  .add-card {
+    width: 80vw !important;
+  }
+  .add-card h4 {
+    font-size: 1rem;
+  }
+  .add-card-label-bx {
+    flex-wrap: wrap !important;
+  }
+  .add-card-label {
+    margin-right: 0.2rem;
+    font-size: 1rem !important;
+    padding: 1rem 0.4rem !important;
+  }
+  .delete-label-btn {
+    font-size: 1rem !important;
+  }
+  .add-card button {
+    font-size: 1rem !important;
+  }
+  .card-date {
+    font-size: 0.7rem;
+  }
+  .card-priority {
+    font-size: 0.7rem;
+  }
+  .card-title-bx {
+    align-items: center;
+    margin-top: 0.8rem;
+  }
+  .card-title {
+    font-size: 0.9rem;
+  }
+  .card-label {
+    margin-right: 0.2rem;
+    font-size: 0.6rem !important;
+    padding: 0.1rem !important;
+  }
+  .card-user {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .add-card {
+    width: 90vw !important;
+  }
+  .add-card h4 {
+    font-size: 0.9rem;
+  }
+  .add-card-label {
+    margin-right: 0.2rem;
+    font-size: 0.9rem !important;
+    padding: 1rem 0.4rem !important;
+  }
+  .delete-label-btn {
+    font-size: 0.9rem !important;
+  }
+  .add-card button {
+    font-size: 0.8rem !important;
+  }
+  .card-date {
+    font-size: 0.8rem;
+  }
+  .card-priority {
+    font-size: 0.8rem;
+  }
+  .card-title-bx {
+    align-items: center;
+    margin-top: 0.8rem;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+  .card-label {
+    margin-right: 0.1rem;
+    font-size: 0.8rem !important;
+    padding: 0.1rem !important;
+  }
+  .card-user {
+    font-size: 0.8rem;
+  }
+}

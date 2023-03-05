@@ -1,0 +1,48 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+}
+.boards {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  width: 75vw;
+  padding: 3rem;
+  height: auto;
+  max-height: 100%;
+}
+.more-menu-icon {
+  color: #7f8487;
+}
+
+/* Media Queries */
+/* For large devices */
+
+@media screen and (max-width: 1024px) {
+  .boards {
+    gap: 2rem;
+    width: 90vw;
+    padding: 2rem;
+  }
+}
+
+/* For medium devices */
+
+@media screen and (max-width: 768px) {
+  .boards {
+    gap: 1rem;
+    width: 100vw;
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+}
+
+/* For small devices */
+
+@media screen and (max-width: 350px) {
+}

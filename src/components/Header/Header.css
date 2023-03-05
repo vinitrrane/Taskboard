@@ -1,0 +1,9 @@
+.navbar {
+  background-color: #dddd !important;
+  box-shadow: none !important;
+}
+.navbar-title {
+  justify-content: center;
+  width: 100%;
+  color: #0c0c0c;
+}
