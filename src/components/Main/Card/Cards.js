@@ -10,19 +10,19 @@ import CardLabel from './Label/CardLabel';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeCard } from '../../../redux/store/slice/boardSlice';
 import EditCard from './EditCard';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable } from '@hello-pangea/dnd';
 
 const Cards = ({ cardItem, boardId, index }) => {
   // Sending card data to redux
   const dispatch = useDispatch();
 
   // Receiving board & card data from redux
-  const card = useSelector((state) => state.boards[boardId].cards);
+  const cards = useSelector((state) => state.boards[boardId].cards);
   // Finding card index
-  const cardId = card.findIndex((item) => item.id === cardItem.id);
+  const cardId = cards.findIndex((item) => item.id === cardItem.id);
   // Finding card labels
-  const cardLabels = card[cardId]?.labels;
-  const cardDate = new Date(card[cardId]?.date);
+  const cardLabels = cards[cardId]?.labels;
+  const cardDate = new Date(cards[cardId]?.date);
 
   // Modal open state
   const [open, setOpen] = useState(false);
@@ -48,7 +48,7 @@ const Cards = ({ cardItem, boardId, index }) => {
 
   return (
     <>
-      <Draggable draggableId={String(cardItem.id)} index={index}>
+      <Draggable draggableId={String(cards[cardId]?.id)} index={index}>
         {(provided) => (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <Card className='card-bx' sx={{ overflow: 'visible' }}>
@@ -71,7 +71,7 @@ const Cards = ({ cardItem, boardId, index }) => {
                               : amber[400]
                           }`,
                         }}>
-                        {card[cardId]?.priority}
+                        {cards[cardId]?.priority}
                       </div>
                     </IconButton>
                   </span>
@@ -79,7 +79,7 @@ const Cards = ({ cardItem, boardId, index }) => {
               </div>
               <div className='card-main'>
                 <div className='card-title-bx' sx={{ flexWrap: 'wrap' }}>
-                  <p className='card-title'>{card[cardId]?.title}</p>
+                  <p className='card-title'>{cards[cardId]?.title}</p>
                 </div>
                 <div className='card-label-bx'>
                   <Stack direction='row' sx={{ flexWrap: 'wrap' }}>
@@ -96,7 +96,7 @@ const Cards = ({ cardItem, boardId, index }) => {
                       {avtarName}
                     </Avatar>
                   </IconButton>
-                  <p className='card-user'>{card[cardId]?.user}</p>
+                  <p className='card-user'>{cards[cardId]?.user}</p>
                 </div>
                 <IconButton className='card-menu' edge='end' size='small' sx={{ p: 0 }} onClick={handleClick}>
                   <MoreVertIcon fontSize='small' className='more-menu-icon' />

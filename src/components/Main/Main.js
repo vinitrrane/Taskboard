@@ -3,7 +3,7 @@ import Board from './Board/Board';
 import AddBoard from './Board/AddBoard';
 import './Main.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext } from '@hello-pangea/dnd';
 import { dragHandler } from '../../redux/store/slice/boardSlice';
 import { Grid } from '@mui/material';
 
@@ -12,25 +12,16 @@ const Main = () => {
   const dispatch = useDispatch();
   // Receiving board data from redux
   const boards = useSelector((state) => state.boards);
-  const onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
 
-    if (!destination) {
-      return;
-    }
-    const droppableIdStart = source.droppableId;
-    const droppableIdEnd = destination.droppableId;
-    const droppableIndexStart = source.index;
-    const droppableIndexEnd = destination.index;
-    const board = boards.find((board) => String(board.id) === droppableIdStart);
-    dispatch(
-      dragHandler({ droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, board })
-    );
+  // Drag & drop handler
+  const onDragEnd = (result) => {
+    dispatch(dragHandler(result));
   };
+
   return (
-    <div className='main'>
-      <div className='boards'>
-        <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className='main'>
+        <div className='boards'>
           <Grid container spacing={2}>
             {boards?.map((boardItem, index) => {
               return <Board key={boardItem?.id} boardItem={boardItem} index={index} />;
@@ -39,9 +30,9 @@ const Main = () => {
               {boards?.length > 2 ? null : <AddBoard />}
             </Grid>
           </Grid>
-        </DragDropContext>
+        </div>
       </div>
-    </div>
+    </DragDropContext>
   );
 };
 

@@ -6,4 +6,10 @@
   justify-content: center;
   width: 100%;
   color: #0c0c0c;
+  letter-spacing: 0.2rem;
+}
+.navbar-logo {
+  width: 2.5rem;
+  height: auto;
+  margin-right: 0.2rem;
 }

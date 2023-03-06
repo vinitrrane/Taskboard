@@ -8,7 +8,7 @@ import { Grid, Typography, IconButton, Menu, MenuItem, ListItemIcon } from '@mui
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable } from '@hello-pangea/dnd';
 
 const Board = ({ boardItem, index }) => {
   // Sending card data to redux
@@ -27,6 +27,7 @@ const Board = ({ boardItem, index }) => {
   const openDropDown = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log(boards[boardId]);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -43,23 +44,22 @@ const Board = ({ boardItem, index }) => {
     dispatch(removeAllCards(boardId));
     setAnchorEl(null);
   };
-
   return (
     <>
-      <Droppable droppableId={String(boardItem.id)} index={index}>
+      <Droppable droppableId={String(boards[boardId]?.id)}>
         {(provided) => (
           <Grid item xs={12} sm={4} {...provided.droppableProps} ref={provided.innerRef}>
             <div className='board'>
               <div className='board-top'>
                 <div className='board-title'>
-                  {boards[boardId]?.title} <div className='board-counter'>{boardItem?.cards.length}</div>
+                  {boards[boardId]?.title}
+                  <div className='board-counter'>{boards[boardId]?.cards?.length}</div>
                   <div className='board-menu'>
                     <IconButton size='small' sx={{ p: 0 }} onClick={handleClick}>
                       <MoreVertIcon fontSize='small' className='more-menu-icon' />
                     </IconButton>
                   </div>
                 </div>
-
                 <Menu
                   id='basic-menu'
                   sx={{ borderRadius: '16px' }}
@@ -96,9 +96,9 @@ const Board = ({ boardItem, index }) => {
                 {boards[boardId]?.cards?.map((cardItem, index) => (
                   <Cards key={cardItem.id} cardItem={cardItem} boardId={boardId} index={index} />
                 ))}
+                {provided.placeholder}
               </div>
             </div>
-            {provided.placeholder}
           </Grid>
         )}
       </Droppable>
