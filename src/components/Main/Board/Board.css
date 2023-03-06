@@ -76,6 +76,9 @@
 /* For large devices */
 
 @media screen and (max-width: 1024px) {
+  .add-board-bx {
+    padding: 0.5rem 1rem;
+  }
   .add-board-title {
     font-size: 1rem;
   }
@@ -106,8 +109,11 @@
 /* For medium devices */
 
 @media screen and (max-width: 768px) {
+  .add-board-bx {
+    padding: 0.4rem 0.9rem;
+  }
   .add-board-title {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
   .add-btn {
     font-size: 0.9rem;
@@ -134,8 +140,11 @@
 }
 
 @media screen and (max-width: 576px) {
+  .add-board-bx {
+    padding: 0.4rem 0.8rem;
+  }
   .add-board-title {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   .add-btn {
     font-size: 0.8rem;

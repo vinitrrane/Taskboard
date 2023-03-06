@@ -14,8 +14,8 @@ import {
   Grid,
   Stack,
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { addNewCard } from '../../../redux/store/slice/boardSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { editCard } from '../../../redux/store/slice/boardSlice';
 import AddCardLabel from './Label/AddCardLabel';
 import { red, blue, grey } from '@mui/material/colors';
 
@@ -31,22 +31,23 @@ const style = {
   borderRadius: '4px',
   p: 4,
 };
-const AddCard = ({ open, setOpen, boardId }) => {
+const EditCard = ({ open, setOpen, cardId, boardId }) => {
   // Sending card data to redux
   const dispatch = useDispatch();
 
-  // Default date
-  const date = new Date();
-  const defaultDate = date.toISOString().slice(0, 10);
+  // Receiving board data from redux
+  const card = useSelector((state) => state.boards[boardId].cards[cardId]);
+
+  const getDate = new Date(card?.date).toISOString().split('T')[0];
 
   // Form input states
-  const [cardDate, setCardDate] = useState(defaultDate);
-  const [cardPriority, setCardPriority] = useState('');
-  const [cardTitle, setCardTitle] = useState('');
+  const [cardDate, setCardDate] = useState(getDate || '');
+  const [cardPriority, setCardPriority] = useState(card?.priority || '');
+  const [cardTitle, setCardTitle] = useState(card?.title || '');
   const [cardLabelText, setCardLabelText] = useState('');
   const [cardLabelColor, setCardLabelColor] = useState('');
-  const [addCardLabel, setAddCardLabel] = useState([]);
-  const [cardUser, setCardUser] = useState('');
+  const [addCardLabel, setAddCardLabel] = useState([...card?.labels] || []);
+  const [cardUser, setCardUser] = useState(card?.user || '');
 
   // Captialize all words
   const capitalizeWords = (str) => {
@@ -68,9 +69,9 @@ const AddCard = ({ open, setOpen, boardId }) => {
   const addLabelHandler = () => {
     if (cardLabelText === '') {
       alert('Please enter a label name!');
-    } else if (cardLabelText.length <= 2) {
+    } else if (cardLabelText.length <= 3) {
       alert('Label name is too short!');
-    } else if (cardLabelText.length >= 20) {
+    } else if (cardLabelText.length >= 15) {
       alert('Label name is too long!');
     } else {
       setAddCardLabel([
@@ -91,7 +92,7 @@ const AddCard = ({ open, setOpen, boardId }) => {
   };
 
   // Form submit handler
-  const onSubmitHandler = (e) => {
+  const onUpdateHandler = (e) => {
     e.preventDefault();
     if (cardTitle === '') {
       alert('Card title is empty!');
@@ -99,33 +100,39 @@ const AddCard = ({ open, setOpen, boardId }) => {
       alert('Card title is too short!');
     } else {
       dispatch(
-        addNewCard({
+        editCard({
           boardId,
-          id: Date.now() + Math.random(),
-          date: cardDate,
-          priority: cardPriority,
-          title: capitalizeSentence(cardTitle),
-          labels: addCardLabel,
-          user: capitalizeWords(cardUser),
+          cardId,
+          cardData: {
+            id: Date.now() + Math.random(),
+            date: cardDate,
+            priority: cardPriority,
+            title: capitalizeSentence(cardTitle),
+            labels: addCardLabel,
+            user: capitalizeWords(cardUser),
+          },
         })
       );
-      onResetHandler();
+      setCardDate(getDate);
+      setCardPriority('');
+      setCardTitle('');
+      setCardLabelText('');
+      setCardLabelColor('');
+      setAddCardLabel([]);
+      setCardUser('');
       setOpen(false);
     }
   };
-  // Form reset handler
-  const onResetHandler = () => {
-    setCardDate(defaultDate);
+
+  // Form close handler
+  const onCloseHandler = () => {
+    setCardDate(getDate);
     setCardPriority('');
     setCardTitle('');
     setCardLabelText('');
     setCardLabelColor('');
     setAddCardLabel([]);
     setCardUser('');
-  };
-  // Form close handler
-  const onCloseHandler = () => {
-    onResetHandler();
     setOpen(false);
   };
 
@@ -146,8 +153,8 @@ const AddCard = ({ open, setOpen, boardId }) => {
         }}>
         <Fade in={open}>
           <Box sx={style} className='add-card'>
-            <h4>Add Card</h4>
-            <form action='' className='add-card-bx' onSubmit={onSubmitHandler}>
+            <h4>Edit Card</h4>
+            <form action='' className='add-card-bx' onSubmit={onUpdateHandler}>
               <br />
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -240,7 +247,7 @@ const AddCard = ({ open, setOpen, boardId }) => {
                     id='datetime-local'
                     label='Date'
                     type='date'
-                    defaultValue={defaultDate}
+                    value={cardDate}
                     fullWidth
                     onChange={(e) => setCardDate(e.target.value)}
                     InputLabelProps={{
@@ -262,14 +269,9 @@ const AddCard = ({ open, setOpen, boardId }) => {
                 <Grid item xs={12}>
                   <Stack spacing={2} direction='row' sx={{ display: 'flex', justifyContent: 'center' }}>
                     <Button sx={{ border: '2px solid #8BF5FA', color: '#757575' }} type='submit'>
-                      Submit
+                      Update
                     </Button>
-                    <Button
-                      sx={{ border: '2px solid #8BF5FA', color: '#757575' }}
-                      onClick={onResetHandler}
-                      type='reset'>
-                      Reset
-                    </Button>
+
                     <Button sx={{ border: '2px solid #8BF5FA', color: '#757575' }} onClick={onCloseHandler}>
                       Close
                     </Button>
@@ -284,4 +286,4 @@ const AddCard = ({ open, setOpen, boardId }) => {
   );
 };
 
-export default AddCard;
+export default EditCard;

@@ -2,60 +2,44 @@ import React from 'react';
 import Board from './Board/Board';
 import AddBoard from './Board/AddBoard';
 import './Main.css';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { DragDropContext } from 'react-beautiful-dnd';
+import { dragHandler } from '../../redux/store/slice/boardSlice';
 import { Grid } from '@mui/material';
 
 const Main = () => {
+  // Sending card data to redux
+  const dispatch = useDispatch();
   // Receiving board data from redux
   const boards = useSelector((state) => state.boards);
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
 
-  // Drag and drop handlers
-  // const [target, setTarget] = useState({
-  //   cardId: '',
-  //   boardId: '',
-  // });
-  // const dragEnterHandler = (cardId, boardId) => {
-  //   setTarget({
-  //     cardId,
-  //     boardId,
-  //   });
-  // };
-  // const dragEndHandler = (cardId, boardId) => {
-  //   let sourceBoardIndex, sourceCardIndex, targetBoardIndex, targetCardIndex;
-
-  //   sourceBoardIndex = boards.findIndex((item) => item.id === boardId);
-  //   if (sourceBoardIndex < 0) return;
-
-  //   sourceCardIndex = boards[sourceBoardIndex].cards.findIndex((item) => item.id === cardId);
-  //   if (sourceCardIndex < 0) return;
-
-  //   targetBoardIndex = boards.findIndex((item) => item.id === target.boardId);
-  //   if (targetBoardIndex < 0) return;
-
-  //   targetCardIndex = boards[targetBoardIndex].cards.findIndex((item) => item.id === target.cardId);
-  //   if (targetCardIndex < 0) return;
-
-  //   const tempBoards = [...boards];
-  //   const tempCards = tempBoards[sourceBoardIndex].cards[sourceCardIndex];
-
-  //   tempBoards[sourceBoardIndex].cards.slice(sourceCardIndex, 1);
-
-  //   tempBoards[targetBoardIndex].card.splice(targetCardIndex, 0, tempCards);
-
-  //   dispatch(dragHandler(tempBoards));
-  // };
+    if (!destination) {
+      return;
+    }
+    const droppableIdStart = source.droppableId;
+    const droppableIdEnd = destination.droppableId;
+    const droppableIndexStart = source.index;
+    const droppableIndexEnd = destination.index;
+    const board = boards.find((board) => String(board.id) === droppableIdStart);
+    dispatch(
+      dragHandler({ droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, board })
+    );
+  };
   return (
     <div className='main'>
       <div className='boards'>
-        <Grid container spacing={2}>
-          {boards?.map((boardItem) => {
-            return <Board key={boardItem?.id} boardItem={boardItem} />;
-          })}
-          <Grid item xs>
-            {boards?.length > 2 ? null : <AddBoard />}
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Grid container spacing={2}>
+            {boards?.map((boardItem, index) => {
+              return <Board key={boardItem?.id} boardItem={boardItem} index={index} />;
+            })}
+            <Grid item xs>
+              {boards?.length > 2 ? null : <AddBoard />}
+            </Grid>
           </Grid>
-        </Grid>
+        </DragDropContext>
       </div>
     </div>
   );
