@@ -24,7 +24,7 @@ const Main = () => {
         <div className='boards'>
           <Grid container spacing={2}>
             {boards?.map((boardItem, index) => {
-              return <Board key={boardItem?.id} boardItem={boardItem} index={index} />;
+              return <Board key={boardItem?.id} boardItem={boardItem} />;
             })}
             <Grid item xs>
               {boards?.length > 2 ? null : <AddBoard />}

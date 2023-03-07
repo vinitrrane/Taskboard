@@ -8,7 +8,7 @@ export const boardSlice = createSlice({
       state.push(action.payload);
     },
     removeBoard(state, action) {
-      const boardIndex = action.payload.boardId;
+      const boardIndex = action.payload;
       state.splice(boardIndex, 1);
     },
     removeAllCards(state, action) {

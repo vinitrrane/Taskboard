@@ -10,7 +10,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Droppable } from '@hello-pangea/dnd';
 
-const Board = ({ boardItem, index }) => {
+const Board = ({ boardItem }) => {
   // Sending card data to redux
   const dispatch = useDispatch();
 
@@ -27,7 +27,6 @@ const Board = ({ boardItem, index }) => {
   const openDropDown = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(boards[boardId]);
   };
   const handleClose = () => {
     setAnchorEl(null);
